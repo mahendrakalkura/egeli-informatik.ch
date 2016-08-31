@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+
+POSTGRESQL = {
+    'host': '...',
+    'port': '...',
+    'user': '...',
+    'password': '...',
+    'database': '...',
+}
+
+PROXIES = {
+    'http': '...',
+    'https': '...',
+}
+
+PYRES = 20
+
+SENTRY = None
+
+SERVER_HOST = '0.0.0.0'
+SERVER_PORT = 5555
