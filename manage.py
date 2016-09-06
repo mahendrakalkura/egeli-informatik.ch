@@ -301,7 +301,7 @@ def report():
                         details['name'] if details else '',
                         details['addresses']['primary'] if details else '',
                         details['addresses']['secondary'] if details else '',
-                        details['addresses']['zip code'] if details else '',
+                        details['addresses']['zip_code'] if details else '',
                         details['tel'] if details else '',
                         details['fax'] if details else '',
                         details['email'] if details else '',
