@@ -289,22 +289,25 @@ def report():
                 '''
                 cursor.execute(query)
                 for record in tqdm(cursor, total=total):
+                    details = None
+                    if 'error' in details:
+                        details = record['details']
                     rows.writerow([
                         record['road'],
                         record['number'],
                         record['zip_code'],
                         record['city'],
-                        record['name'],
-                        record['addresses']['primary'],
-                        record['addresses']['secondary'],
-                        record['addresses']['zip code'],
-                        record['tel'],
-                        record['fax'],
-                        record['email'],
-                        record['others']['iban'],
-                        record['others']['account_number'],
-                        record['others']['client_number'],
-                        record['others']['eschkg_id'],
+                        details['name'] if details else '',
+                        details['addresses']['primary'] if details else '',
+                        details['addresses']['secondary'] if details else '',
+                        details['addresses']['zip code'] if details else '',
+                        details['tel'] if details else '',
+                        details['fax'] if details else '',
+                        details['email'] if details else '',
+                        details['others']['iban'] if details else '',
+                        details['others']['account_number'] if details else '',
+                        details['others']['client_number'] if details else '',
+                        details['others']['eschkg_id'] if details else '',
                     ])
 
 
