@@ -362,7 +362,7 @@ if __name__ == '__main__':
         if argv[1] == 'workers':
             workers()
         if argv[1] == 'report':
-            workers()
+            report()
         if argv[1] == 'proxies':
             proxies()
         if argv[1] == 'test':
