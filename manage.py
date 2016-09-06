@@ -247,6 +247,67 @@ def details():
                 r.enqueue(Record, record['id'])
 
 
+def report():
+    with closing(get_connection()) as connection:
+        total = 0
+        with closing(connection.cursor()) as cursor:
+            query = '''
+            SELECT COUNT(id) AS count
+            FROM records
+            '''
+            cursor.execute(query)
+            total = cursor.fetchone()['count']
+        with open(
+            'report.csv',
+            'w',
+            encoding='iso-8859-1',
+            newline='',
+        ) as resource:
+            rows = csv.writer(resource, delimiter=u';')
+            rows.writerow([
+                'Road',
+                'Number',
+                'Zip Code',
+                'City',
+                'Name',
+                'Addresses :: Primary',
+                'Addresses :: Secondary',
+                'Addresses :: Zip Code',
+                'Telephone',
+                'Fax',
+                'Email',
+                'Others :: IBAN',
+                'Others :: Account Number',
+                'Others :: Client Number',
+                'Others :: ESCHKG ID',
+            ])
+            with closing(connection.cursor('cursor')) as cursor:
+                query = '''
+                SELECT *
+                FROM records
+                ORDER BY id ASC
+                '''
+                cursor.execute(query)
+                for record in tqdm(cursor, total=total):
+                    rows.writerow([
+                        record['road'],
+                        record['number'],
+                        record['zip_code'],
+                        record['city'],
+                        record['name'],
+                        record['addresses']['primary'],
+                        record['addresses']['secondary'],
+                        record['addresses']['zip code'],
+                        record['tel'],
+                        record['fax'],
+                        record['email'],
+                        record['others']['iban'],
+                        record['others']['account_number'],
+                        record['others']['client_number'],
+                        record['others']['eschkg_id'],
+                    ])
+
+
 def workers():
     workers = Khan(pool_size=PYRES, queues=['records'])
     workers.work()
@@ -299,6 +360,8 @@ if __name__ == '__main__':
         if argv[1] == 'details':
             details()
         if argv[1] == 'workers':
+            workers()
+        if argv[1] == 'report':
             workers()
         if argv[1] == 'proxies':
             proxies()
