@@ -23,6 +23,7 @@ $ python manage.py insert
 $ python manage.py update
 $ python manage.py details
 $ python manage.py workers
+$ python manage.py report
 $ python manage.py proxies
 $ python manage.py test
 $ RESWEB_SETTINGS='.../settings.py' resweb
