@@ -290,8 +290,9 @@ def report():
                 cursor.execute(query)
                 for record in tqdm(cursor, total=total):
                     details = None
-                    if 'error' in details:
-                        details = record['details']
+                    if record['details']:
+                        if 'error' not in record['details']:
+                            details = record['details']
                     rows.writerow([
                         record['road'],
                         record['number'],
