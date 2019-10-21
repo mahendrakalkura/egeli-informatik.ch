@@ -34,7 +34,7 @@ pystache==0.5.4
 queuelib==1.4.2
 raven==5.24.3
 redis==2.10.5
-requests==2.11.0
+requests==2.20.0
 resweb==0.1.7
 Scrapy==1.1.1
 service-identity==16.0.0
